@@ -18,13 +18,27 @@ class MealViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        if isPresentingInAddMealMode {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController!.popViewController(animated: true)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         name.delegate = self
+        
+        // Set up views if editing an existing Meal.
+        if let meal = meal {
+            navigationItem.title = meal.name
+            name.text   = meal.name
+        }
+        
+        
         checkValidMealName()
     }
 

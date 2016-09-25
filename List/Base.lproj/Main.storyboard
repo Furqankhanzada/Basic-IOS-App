@@ -71,7 +71,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="dcB-JU-doF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2406" y="154"/>
+            <point key="canvasLocation" x="2406" y="129"/>
         </scene>
         <!--Your Meals-->
         <scene sceneID="oI7-Zr-pIZ">
@@ -105,6 +105,7 @@
                                 <connections>
                                     <outlet property="nameLabel" destination="9wU-UT-Kvz" id="sXX-qq-e2K"/>
                                     <outlet property="photoImageView" destination="JlS-cv-6Zb" id="yax-Ff-q1w"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="zYm-to-apg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -159,10 +160,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JZS-KB-A9o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1557.9710144927537" y="129.61956521739131"/>
+            <point key="canvasLocation" x="1642" y="619"/>
         </scene>
     </scenes>
     <resources>
         <image name="list" width="45" height="45"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="zYm-to-apg"/>
+    </inferredMetricsTieBreakers>
 </document>
