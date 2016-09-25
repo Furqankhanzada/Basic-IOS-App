@@ -14,10 +14,18 @@ class MealViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var nameLable: UILabel!
     
+    var meal: Meal?
+    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         name.delegate = self
+        checkValidMealName()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,6 +41,19 @@ class MealViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         nameLable.text = textField.text
+        checkValidMealName()
+        navigationItem.title = textField.text
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // Disable the Save button while editing.
+        saveButton.isEnabled = false
+    }
+    
+    func checkValidMealName() {
+        // Disable the Save button if the text field is empty.
+        let text = name.text ?? ""
+        saveButton.isEnabled = !text.isEmpty
     }
     
     // MARK: Actions
@@ -40,5 +61,16 @@ class MealViewController: UIViewController, UITextFieldDelegate {
         nameLable.text = "Default Text"
     }
     
+    // MARK: Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (sender != nil) {
+            let name = self.name.text ?? ""
+            let photo = UIImage(named: "list")!
+            
+            // Set the meal to be passed to MealTableViewController after the unwind segue.
+            meal = Meal(name: name, photo: photo)
+        }
+    }
 }
 
